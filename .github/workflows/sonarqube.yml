@@ -1,0 +1,25 @@
+name: SonarQube FRIDA
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  sonar:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Run SonarQube FRIDA
+        uses: Fridaplatform/codeguard-extensions/actions/codeguard-sonarqube@master
+        with:
+          installationId: 'gh_132092397'
+          teamId: 'VL6mfJyJXFkFGsn13RXp'
+          projectKey: 'codeguard'
+          sources: '/usr/src'
+          exclusions: '**/node_modules/**,**/dist/**,**/build/**,**/dist/**,**/.emulator-data/**,**/.turbo/**,**/firebase/**,**/.vscode/**'
+          rulesApiUrl: 'https://apis.codeguard-stg.fridaplatform.online/Teams-getSonarRules'
